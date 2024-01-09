@@ -11,6 +11,7 @@ RUN apt-get install -y flex
 RUN apt-get install -y bison
 RUN apt-get install -y libfl2 # (CIRCT)
 RUN apt-get install -y libfl-dev # (CIRCT)
+RUN apt-get install -y git
 WORKDIR /workdir
 ENV HOME=/workdir
 
@@ -19,7 +20,7 @@ ENV PATH=$PATH:/workdir/bin
 RUN apt-get update
 RUN apt-get install -y python3-numpy
 RUN apt-get install -y python3-pip
-RUN python -m pip install --upgrade pip
+RUN python3 -m pip install --upgrade pip
 RUN apt-get install -y gdb
 RUN apt-get install -y lldb
 
@@ -29,9 +30,9 @@ RUN apt-get install -y emacs
 RUN apt-get install -y valgrind
 RUN apt-get install -y libeigen3-dev
 RUN apt-get install -y clang-format
-RUN python -m pip install wheel
-RUN python -m pip install numpy
-RUN python -m pip install torch==2.0.0+cpu torchvision==0.15.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
+RUN python3 -m pip install wheel
+RUN python3 -m pip install numpy
+RUN python3 -m pip install torch>=2.0.0+cpu torchvision>=0.15.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
 RUN git clone https://github.com/onnx/tutorials.git
 # Install clang
 RUN apt-get install -y lsb-release wget software-properties-common
@@ -50,7 +51,7 @@ RUN apt-get install -y ssh-client
 # ADD workspace /workdir/workspace
 
 # 5) Fix git by reattaching head and making git see other branches than main.
-WORKDIR /workdir/onnx-mlir
+# WORKDIR /workdir/onnx-mlir
 # Add optional personal fork and disable pushing to upstream (best practice).
 # RUN git remote add origin https://github.com/<<user>>/onnx-mlir.git
 # RUN git remote set-url --push upstream no_push
