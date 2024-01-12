@@ -2,6 +2,7 @@ FROM ubuntu:latest as builder
 
 # 1) Install packages.
 USER root
+RUN echo "nameserver 4.2.2.4" > /etc/resolv.conf 
 RUN apt-get update
 RUN apt-get upgrade
 RUN apt-get install -y build-essential
