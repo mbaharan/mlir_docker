@@ -64,7 +64,7 @@ RUN echo "${USER}:${PASS}" | chpasswd
 
 # Set workdir and switch back to non-root user
 WORKDIR $HOME
-USER ${UID}
+USER ${USER}
 RUN mkdir -p ${HOME}/Projects
 VOLUME ${HOME}/Projects
 
